@@ -26,7 +26,7 @@ app.get('/docs', (req, res, next) => {
 })
 
 app.get('/companies', (req, res, next) => {
-  knex('blockCompanies')
+  knex('companies')
   .then((rows) => {
     res.send(rows)
   })
