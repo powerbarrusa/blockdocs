@@ -15,8 +15,8 @@ app.use(bodyParser.json())
 
 app.use(express.static('public'))
 
-app.get('/', (req, res, next) => {
-  knex('memes')
+app.get('/docs', (req, res, next) => {
+  knex('docs')
   .then((rows) => {
     res.send(rows)
   })
@@ -24,3 +24,23 @@ app.get('/', (req, res, next) => {
     next(err)
   })
 })
+
+app.get('/users', (req, res, next) => {
+  knex('users')
+  .then((rows) => {
+    res.send(rows)
+  })
+  .catch((err) => {
+    next(err)
+  })
+})
+
+app.use((err, req, res, next) => {
+  res.status(500).json({ error: { message: 'SERVER ERROR WHAAT?!' } })
+})
+
+app.use((req, res, next) => {
+  res.status(404).json({ error: { message: 'Route not found, dude.' } })
+})
+
+app.listen(port, () => console.log(`blockDocs listening on port ${port}!`))
