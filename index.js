@@ -15,7 +15,7 @@ app.use(bodyParser.json())
 
 app.use(express.static('public'))
 
-app.get('/', (req, res, next) => {
+app.get('/docs', (req, res, next) => {
   knex('docs')
   .then((rows) => {
     res.send(rows)
