@@ -40,8 +40,10 @@ app.get('/codocs', (req, res, next) => {
   .join("codocs", {"codocs.docs_id": "docs.id"})
   .join("companies", {"codocs.companies_id":"companies.id"})
   .then((coDocs) => {
-    console.log(coDocs)
     res.send(coDocs)
+  })
+  .catch((err) => {
+    next(err)
   })
 })
 
